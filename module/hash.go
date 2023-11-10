@@ -1,4 +1,4 @@
-package backendyak
+package module
 
 import "golang.org/x/crypto/bcrypt"
 

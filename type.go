@@ -1,48 +1,9 @@
-package backendgcf
-type GeometryPolygon struct {
-	Coordinates [][][]float64 `json:"coordinates" bson:"coordinates"`
-	Type        string        `json:"type" bson:"type"`
-}
-
-type GeometryLineString struct {
-	Coordinates [][]float64 `json:"coordinates" bson:"coordinates"`
-	Type        string      `json:"type" bson:"type"`
-}
-
-type GeometryPoint struct {
-	Coordinates []float64 `json:"coordinates" bson:"coordinates"`
-	Type        string    `json:"type" bson:"type"`
-}
-
-type GeoJsonLineString struct {
-	Type       string             `json:"type" bson:"type"`
-	Properties Properties         `json:"properties" bson:"properties"`
-	Geometry   GeometryLineString `json:"geometry" bson:"geometry"`
-}
-
-type GeoJsonPolygon struct {
-	Type       string          `json:"type" bson:"type"`
-	Properties Properties      `json:"properties" bson:"properties"`
-	Geometry   GeometryPolygon `json:"geometry" bson:"geometry"`
-}
-
-type Geometry struct {
-	Coordinates interface{} `json:"coordinates" bson:"coordinates"`
-	Type        string      `json:"type" bson:"type"`
-}
-type GeoJson struct {
-	Type       string     `json:"type" bson:"type"`
-	Properties Properties `json:"properties" bson:"properties"`
-	Geometry   Geometry   `json:"geometry" bson:"geometry"`
-}
-
-type Properties struct {
-	Name string `json:"name" bson:"name"`
-}
+package backendyak
 
 type User struct {
-	Username string `json:"username" bson:"username"`
-	Password string `json:"password" bson:"password"`
+	Email    string `bson:"email,omitempty" json:"email,omitempty"`
+	Username string `bson:"username,omitempty" json:"username,omitempty"`
+	Password string `bson:"password,omitempty" json:"password,omitempty"`
 	Role     string `json:"role,omitempty" bson:"role,omitempty"`
 }
 

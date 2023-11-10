@@ -1,4 +1,4 @@
-package backendyak
+package module
 
 import (
 	"os"
@@ -6,6 +6,8 @@ import (
 	"github.com/aiteung/atdb"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
+
+	model "github.com/nugisorange/backendgcf/model"
 )
 
 func SetConnection(MONGOCONNSTRINGENV, dbname string) *mongo.Database {
@@ -17,8 +19,8 @@ func SetConnection(MONGOCONNSTRINGENV, dbname string) *mongo.Database {
 	return atdb.MongoConnect(DBmongoinfo)
 }
 
-func IsPasswordValid(mongoconn *mongo.Database, collection string, userdata User) bool {
+func IsPasswordValid(mongoconn *mongo.Database, collection string, userdata model.User) bool {
 	filter := bson.M{"username": userdata.Username}
-	res := atdb.GetOneDoc[User](mongoconn, collection, filter)
+	res := atdb.GetOneDoc[model.User](mongoconn, collection, filter)
 	return CheckPasswordHash(userdata.Password, res.Password)
 }
