@@ -1,4 +1,4 @@
-package backendyak
+package backendgcf
 
 type User struct {
 	Email    string `bson:"email,omitempty" json:"email,omitempty"`
