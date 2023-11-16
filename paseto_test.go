@@ -14,12 +14,12 @@ func TestGeneratePrivateKeyPaseto(t *testing.T) {
 	privateKey, publicKey := watoken.GenerateKey()
 	fmt.Println(privateKey)
 	fmt.Println(publicKey)
-	hasil, err := watoken.Encode("syahid", privateKey)
+	hasil, err := watoken.Encode("user", privateKey)
 	fmt.Println(hasil, err)
 }
 // Hash Pass
 func TestGeneratePasswordHash(t *testing.T) {
-	password := "kepo"
+	password := "user1234"
 	hash, _ := HashPassword(password) // ignore error for the sake of simplicity
 	fmt.Println("Password:", password)
 	fmt.Println("Hash:    ", hash)
@@ -29,10 +29,10 @@ func TestGeneratePasswordHash(t *testing.T) {
 }
 
 func TestHashFunction(t *testing.T) {
-	mconn := SetConnection("MONGOSTRING", "proyek3")
+	mconn := SetConnection("MONGOSTRING", "petasal")
 	var userdata User
-	userdata.Username = "syahid"
-	userdata.Password = "kepo"
+	userdata.Username = "user"
+	userdata.Password = "user1234"
 
 	filter := bson.M{"username": userdata.Username}
 	res := atdb.GetOneDoc[User](mconn, "user", filter)
@@ -45,10 +45,10 @@ func TestHashFunction(t *testing.T) {
 }
 
 func TestIsPasswordValid(t *testing.T) {
-	mconn := SetConnection("MONGOSTRING", "proyek3")
+	mconn := SetConnection("MONGOSTRING", "petasal")
 	var userdata User
-	userdata.Username = "syahid"
-	userdata.Password = "kepo"
+	userdata.Username = "user"
+	userdata.Password = "user1234"
 
 	anu := IsPasswordValid(mconn, "user", userdata)
 	fmt.Println(anu)
