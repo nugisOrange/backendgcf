@@ -15,7 +15,7 @@ func TestGeneratePrivateKeyPaseto(t *testing.T) {
 }
 
 func TestInsertUser(t *testing.T) {
-	mconn := GetConnectionMongo("MONGOSTRING", "gisaw")
+	mconn := GetConnectionMongo("MONGOSTRING", "petasal")
 	var userdata User
 	userdata.Username = "shidiq"
 	userdata.Password = "user123"
