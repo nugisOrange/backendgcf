@@ -2,11 +2,11 @@ package backendgcf
 
 import (
 	"os"
-	"context"
+	
 
 	"github.com/aiteung/atdb"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/bson"
+	
 )
 
 func GetConnectionMongo(MongoString, dbname string) *mongo.Database {
@@ -18,13 +18,7 @@ func GetConnectionMongo(MongoString, dbname string) *mongo.Database {
 	return conn
 }
 
-func IsPasswordValid(mongoconn *mongo.Database, collection string, userdata User) bool {
-	filter := bson.M{"username": userdata.Username}
-	res := atdb.GetOneDoc[User](mongoconn, collection, filter)
-	return CheckPasswordHash(userdata.Password, res.Password)
-}
-
-func GetAllData(MongoConnect *mongo.Database, colname string) []GeoJson {
+func GetAllGeoData(MongoConnect *mongo.Database, colname string) []GeoJson {
 	data := atdb.GetAllDoc[[]GeoJson](MongoConnect, colname)
 	return data
 }
@@ -38,34 +32,4 @@ func InsertDataLonlat(MongoConn *mongo.Database, colname string, coordinate []fl
 
 	ins := atdb.InsertOneDoc(MongoConn, colname, req)
 	return ins
-}
-
-func UpdateDataGeojson(MongoConn *mongo.Database, colname, name, newVolume, newTipe string) error {
-    // Filter berdasarkan nama
-    filter := bson.M{"name": name}
-
-    // Update data yang akan diubah
-    update := bson.M{
-        "$set": bson.M{
-            "volume": newVolume,
-            "tipe":   newTipe,
-        },
-    }
-
-    // Mencoba untuk mengupdate dokumen
-    _, err := MongoConn.Collection(colname).UpdateOne(context.TODO(), filter, update)
-    if err != nil {
-        return err
-    }
-
-    return nil
-}
-
-func DeleteDataGeojson(MongoConn *mongo.Database, colname string, name string) (*mongo.DeleteResult, error) {
-    filter := bson.M{"name": name}
-    del, err := MongoConn.Collection(colname).DeleteOne(context.TODO(), filter)
-    if err != nil {
-        return nil, err
-    }
-    return del, nil
 }

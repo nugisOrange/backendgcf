@@ -45,23 +45,15 @@ type LonLatProperties struct {
 	Type        string    `json:"type" bson:"type"`
 	Name        string    `json:"name" bson:"name"`
 	Volume      string    `json:"volume" bson:"volume"`
-	Coordinates []float64 `json:"coordinates" bson:"coordinates"`
+	Coordinates []float64 `json:"coordinates" bson:"coordinates, omitempty"`
 }
 
 type Credents struct {
 	Status  string `json:"status" bson:"status"`
-	Token   string `json:"token,omitempty" bson:"token,omitempty"`
 	Message string `json:"message" bson:"message"`
 }
 
-type Credential struct {
-	Status  bool   `json:"status" bson:"status"`
-	Token   string `json:"token,omitempty" bson:"token,omitempty"`
-	Message string `json:"message,omitempty" bson:"message,omitempty"`
-}
-
-type User struct {
+type RegisterStruct struct {
 	Username string `json:"username" bson:"username"`
 	Password string `json:"password" bson:"password"`
-	// Email		 string             	`bson:"email,omitempty" json:"email,omitempty"`
 }

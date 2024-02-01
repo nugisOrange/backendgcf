@@ -1,2 +1,2 @@
 # backendgcf
-package Google Cloud Service
+package untuk memangil di Google Cloud Function
